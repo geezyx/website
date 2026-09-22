@@ -183,7 +183,7 @@
         <span id="mobileFileStatus" class="status-text" style="display: none;"></span>
 
         <div id="msg"></div>
-        <button type="submit" class="btn" id="submitBtn">Send to Google Drive</button>
+        <button type="submit" class="btn" id="submitBtn">Submit</button>
     </form>
 </div>
 
@@ -315,7 +315,7 @@
         msg.style.display = 'block';
         msg.style.backgroundColor = '#f3f4f6';
         msg.style.color = '#1f2937';
-        msg.textContent = "⏳ Uploading to Google Drive...";
+        msg.textContent = "⏳ Uploading...";
 
         const payload = {
             name: document.getElementById('name').value,
