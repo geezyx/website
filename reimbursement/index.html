@@ -195,7 +195,7 @@
     const DEFAULT_DESKTOP_TEXT = "📁 Drag & drop receipt/PDF or click to browse";
 
     // 🛠️ EDIT YOUR EXPENSE CATEGORIES HERE
-    const CATEGORIES = [
+        const CATEGORIES = [
         "Pack Supplies",
         "Den Supplies",
         "Campout/Hike/Event Supplies",
@@ -223,17 +223,21 @@
     const dropZone = document.getElementById('dropZone');
 
     // Consolidated core file processing helper function 
-    function processFile(files) {
-        if (!files || files.length === 0) return;
-        const file = files[0];
+    function processFile(file) {
+        if (!file) return;
         
-        // Update states for both layout visibility formats safely
-        mobileFileStatus.style.display = 'block';
-        mobileFileStatus.style.color = '#2563eb';
-        mobileFileStatus.textContent = "⏳ Reading file...";
+        // Check whether the desktop drag box is actively visible on screen
+        const isDesktopLayout = window.getComputedStyle(dropZone).display !== 'none';
         
-        desktopInstructionText.style.color = '#2563eb';
-        desktopInstructionText.textContent = "⏳ Reading file...";
+        if (isDesktopLayout) {
+            mobileFileStatus.style.display = 'none';
+            desktopInstructionText.style.color = '#2563eb';
+            desktopInstructionText.textContent = "⏳ Reading file...";
+        } else {
+            mobileFileStatus.style.display = 'block';
+            mobileFileStatus.style.color = '#2563eb';
+            mobileFileStatus.textContent = "⏳ Reading file...";
+        }
         
         const reader = new FileReader();
         reader.onloadend = function() {
@@ -245,24 +249,26 @@
             
             const successString = `✅ Ready: ${file.name.substring(0, 20)}${file.name.length > 20 ? '...' : ''}`;
             
-            mobileFileStatus.style.color = '#16a34a';
-            mobileFileStatus.textContent = successString;
-            
-            desktopInstructionText.style.color = '#16a34a';
-            desktopInstructionText.textContent = successString;
+            if (isDesktopLayout) {
+                desktopInstructionText.style.color = '#16a34a';
+                desktopInstructionText.textContent = successString;
+            } else {
+                mobileFileStatus.style.color = '#16a34a';
+                mobileFileStatus.textContent = successString;
+            }
         };
         reader.readAsDataURL(file);
     }
 
     // Attach listeners to native change events for the inputs
     document.getElementById('mobileCameraInput').addEventListener('change', function(e) {
-        if (e.target.files.length > 0) processFile(e.target.files);
+        if (e.target.files.length > 0) processFile(e.target.files[0]);
     });
     document.getElementById('mobileFileInput').addEventListener('change', function(e) {
-        if (e.target.files.length > 0) processFile(e.target.files);
+        if (e.target.files.length > 0) processFile(e.target.files[0]);
     });
     document.getElementById('desktopFileInput').addEventListener('change', function(e) {
-        if (e.target.files.length > 0) processFile(e.target.files);
+        if (e.target.files.length > 0) processFile(e.target.files[0]);
     });
 
     // Handle Drag Zone States on Desktop
@@ -281,10 +287,12 @@
     });
 
     dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
         const dt = e.dataTransfer;
         const files = dt.files;
         if (files.length > 0) {
-            processFile(files);
+            processFile(files[0]);
         }
     });
 
@@ -349,6 +357,5 @@
         }
     });
 </script>
-
 </body>
 </html>
