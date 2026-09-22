@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,65 +13,31 @@
             display: flex;
             justify-content: center;
         }
-
         .card {
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             width: 100%;
             max-width: 450px;
         }
-
-        h2 {
-            margin-top: 0;
-            color: #111827;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            color: #374151;
-        }
-
-        input,
-        textarea,
-        select {
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-            background-color: white;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        /* Two-button container for Mobile */
+        h2 { margin-top: 0; color: #111827; text-align: center; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+        label { font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; color: #374151; }
+        input, textarea, select { padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; background-color: white; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        
+        /* Two-button layout container for Touch/Mobile screens */
         .upload-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin: 20px 0 10px 0;
+            margin: 20px 0 15px 0;
         }
-
         .upload-btn {
             background-color: #f3f4f6;
             border: 1px solid #d1d5db;
-            padding: 12px;
+            padding: 14px 10px;
             border-radius: 6px;
             font-size: 0.9rem;
             font-weight: 600;
@@ -86,70 +51,50 @@
             gap: 4px;
             position: relative;
         }
-
         .upload-btn input[type="file"] {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
         }
 
-        /* Desktop Drag and Drop Box */
+        /* Large Drag and Drop Box targeting Desktop */
         .drag-box {
             background-color: #f9fafb;
             border: 2px dashed #d1d5db;
-            padding: 25px 20px;
+            padding: 35px 20px;
             border-radius: 8px;
             text-align: center;
             position: relative;
-            margin: 20px 0 10px 0;
+            margin: 20px 0 15px 0;
             cursor: pointer;
-            display: none;
-            /* Hidden by default, shown on desktops */
+            display: none; 
             transition: background-color 0.2s, border-color 0.2s;
         }
-
         .drag-box.dragover {
             background-color: #eff6ff;
             border-color: #2563eb;
         }
-
         .drag-box input[type="file"] {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
         }
 
-        /* Responsive Layout Rules */
+        .upload-status-display {
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* Media Queries to target pointer capabilities accurately */
         @media (pointer: fine) {
-
-            /* Desktop/Mouse users see the large Drag & Drop Zone */
-            .drag-box {
-                display: block;
-            }
-
-            .upload-options {
-                display: none;
-            }
+            .drag-box { display: block; }
+            .upload-options { display: none; }
         }
-
         @media (pointer: coarse) {
-
-            /* Touch/Mobile users see the dedicated action buttons */
-            .drag-box {
-                display: none;
-            }
-
-            .upload-options {
-                display: grid;
-            }
+            .drag-box { display: none; }
+            .upload-options { display: grid; }
         }
 
         .status-text {
@@ -160,7 +105,7 @@
             margin-bottom: 15px;
             display: block;
         }
-
+        
         .btn {
             background-color: #2563eb;
             color: white;
@@ -172,12 +117,8 @@
             width: 100%;
             cursor: pointer;
         }
-
-        .btn:disabled {
-            background-color: #9ca3af;
-            cursor: not-allowed;
-        }
-
+        .btn:disabled { background-color: #9ca3af; cursor: not-allowed; }
+        
         #msg {
             margin-top: 15px;
             padding: 12px;
@@ -188,203 +129,226 @@
         }
     </style>
 </head>
-
 <body>
 
-    <div class="card">
-        <h2>Submit Receipt</h2>
-        <form id="receiptForm">
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" required>
+<div class="card">
+    <h2>Submit Receipt</h2>
+    <form id="receiptForm">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="date">Expense Date</label>
+            <input type="date" id="date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Expense Category</label>
+            <select id="category" required>
+                <option value="" disabled selected>Select a category...</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount ($)</label>
+            <input type="number" id="amount" step="0.01" min="0.00" placeholder="0.00" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description / Vendor</label>
+            <textarea id="description" rows="2" placeholder="e.g., Target - Office Supplies" required></textarea>
+        </div>
+
+        <!-- MOBILE ELEMENT ACTION BUTTONS -->
+        <div class="upload-options">
+            <div class="upload-btn">
+                <span>📸 Take Photo</span>
+                <input type="file" id="mobileCameraInput" accept="image/*" capture="environment">
             </div>
-
-            <div class="form-group">
-                <label for="date">Expense Date</label>
-                <input type="date" id="date" required>
+            <div class="upload-btn">
+                <span>📁 Upload File/PDF</span>
+                <input type="file" id="mobileFileInput" accept=".jpg,.jpeg,.png,.pdf,application/pdf,image/*">
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="category">Expense Category</label>
-                <select id="category" required>
-                    <option value="" disabled selected>Select a category...</option>
-                </select>
-            </div>
+        <!-- DESKTOP ELEMENT DRAG ZONE -->
+        <div class="drag-box" id="dropZone">
+            <div id="desktopInstructionText" class="upload-status-display">📁 Drag & drop receipt/PDF or click to browse</div>
+            <input type="file" id="desktopFileInput" accept=".jpg,.jpeg,.png,.pdf,application/pdf,image/*">
+        </div>
 
-            <div class="form-group">
-                <label for="amount">Amount ($)</label>
-                <input type="number" id="amount" step="0.01" min="0.00" placeholder="0.00" required>
-            </div>
+        <!-- Dynamic status indicator block for mobile views -->
+        <span id="mobileFileStatus" class="status-text" style="display: none;"></span>
 
-            <div class="form-group">
-                <label for="description">Description / Vendor</label>
-                <textarea id="description" rows="2" placeholder="e.g., Target - Office Supplies" required></textarea>
-            </div>
+        <div id="msg"></div>
+        <button type="submit" class="btn" id="submitBtn">Send to Google Drive</button>
+    </form>
+</div>
 
-            <!-- MOBILE UI: Dual selection buttons -->
-            <div class="upload-options">
-                <div class="upload-btn">
-                    <span>📸 Take Photo</span>
-                    <input type="file" id="mobileCameraInput" accept="image/*" capture="environment">
-                </div>
-                <div class="upload-btn">
-                    <span>📁 Upload File/PDF</span>
-                    <input type="file" id="mobileFileInput" accept=".jpg,.jpeg,.png,.pdf,application/pdf,image/*">
-                </div>
-            </div>
+<script>
+    // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL HERE
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQ5274y2MYWq28nk5VrTZQBRo1Q_3W9VEAQuak4ZmGQRYUkQsedg1PfMdXjFC36mnS/exec";
 
-            <!-- DESKTOP UI: Drag & Drop Zone -->
-            <div class="drag-box" id="dropZone">
-                <span id="desktopLabel">📁 Drag & drop receipt/PDF or click to browse</span>
-                <input type="file" id="desktopFileInput" accept=".jpg,.jpeg,.png,.pdf,application/pdf,image/*">
-            </div>
+    // Default instruction text saved for clean state resets
+    const DEFAULT_DESKTOP_TEXT = "📁 Drag & drop receipt/PDF or click to browse";
 
-            <!-- File status indicator display -->
-            <span id="fileStatus" class="status-text" style="display: none;"></span>
+    // 🛠️ EDIT YOUR EXPENSE CATEGORIES HERE
+    const CATEGORIES = [
+        "Pack Supplies",
+        "Den Supplies",
+        "Campout/Hike/Event Supplies",
+        "Fundraising Supplies",
+        "Leader Registration",
+        "Awards/Advancement",
+        "Other"
+    ];
 
-            <div id="msg"></div>
-            <button type="submit" class="btn" id="submitBtn">Send to Google Drive</button>
-        </form>
-    </div>
+    // Build the collection of dropdown categories dynamically
+    const categorySelect = document.getElementById('category');
+    CATEGORIES.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        categorySelect.appendChild(opt);
+    });
 
-    <script>
-        // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL HERE
-        const GOOGLE_SCRIPT_URL = "https://google.com";
+    // Automatically initialize to current local date
+    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    
+    let fileDataObj = null;
+    const mobileFileStatus = document.getElementById('mobileFileStatus');
+    const desktopInstructionText = document.getElementById('desktopInstructionText');
+    const dropZone = document.getElementById('dropZone');
 
-        // 🛠️ EDIT YOUR CATEGORIES HERE ANYTIME
-        const CATEGORIES = [
-            "Pack Supplies",
-            "Den Supplies",
-            "Campout/Hike/Event Supplies",
-            "Fundraising Supplies",
-            "Leader Registration",
-            "Awards/Advancement",
-            "Other"
-        ];
-
-        // Populate Category Dropdown dynamically
-        const categorySelect = document.getElementById('category');
-        CATEGORIES.forEach(cat => {
-            const opt = document.createElement('option');
-            opt.value = cat;
-            opt.textContent = cat;
-            categorySelect.appendChild(opt);
-        });
-
-        // Autofill today's date
-        document.getElementById('date').value = new Date().toISOString().split('T')[0];
-
-        let fileDataObj = null;
-        const fileStatus = document.getElementById('fileStatus');
-        const dropZone = document.getElementById('dropZone');
-
-        // Consolidated helper function to process files from any input source
-        function processFile(file) {
-            if (!file) return;
-
-            fileStatus.style.display = 'block';
-            fileStatus.style.color = '#2563eb';
-            fileStatus.textContent = "⏳ Reading file...";
-
-            const reader = new FileReader();
-            reader.onloadend = function () {
-                fileDataObj = {
-                    base64Str: reader.result.split(',')[1],
-                    type: file.type,
-                    name: file.name
-                };
-                fileStatus.style.color = '#16a34a';
-                fileStatus.textContent = `✅ Ready: ${file.name.substring(0, 20)}`;
+    // Consolidated core file processing helper function 
+    function processFile(files) {
+        if (!files || files.length === 0) return;
+        const file = files[0];
+        
+        // Update states for both layout visibility formats safely
+        mobileFileStatus.style.display = 'block';
+        mobileFileStatus.style.color = '#2563eb';
+        mobileFileStatus.textContent = "⏳ Reading file...";
+        
+        desktopInstructionText.style.color = '#2563eb';
+        desktopInstructionText.textContent = "⏳ Reading file...";
+        
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            fileDataObj = {
+                base64Str: reader.result.split(',')[1],
+                type: file.type,
+                name: file.name
             };
-            reader.readAsDataURL(file);
-        }
+            
+            const successString = `✅ Ready: ${file.name.substring(0, 20)}${file.name.length > 20 ? '...' : ''}`;
+            
+            mobileFileStatus.style.color = '#16a34a';
+            mobileFileStatus.textContent = successString;
+            
+            desktopInstructionText.style.color = '#16a34a';
+            desktopInstructionText.textContent = successString;
+        };
+        reader.readAsDataURL(file);
+    }
 
-        // Connect file change listeners for all inputs
-        document.getElementById('mobileCameraInput').addEventListener('change', function (e) {
-            if (e.target.files.length > 0) processFile(e.target.files[0]);
-        });
-        document.getElementById('mobileFileInput').addEventListener('change', function (e) {
-            if (e.target.files.length > 0) processFile(e.target.files[0]);
-        });
-        document.getElementById('desktopFileInput').addEventListener('change', function (e) {
-            if (e.target.files.length > 0) processFile(e.target.files[0]);
-        });
+    // Attach listeners to native change events for the inputs
+    document.getElementById('mobileCameraInput').addEventListener('change', function(e) {
+        if (e.target.files.length > 0) processFile(e.target.files);
+    });
+    document.getElementById('mobileFileInput').addEventListener('change', function(e) {
+        if (e.target.files.length > 0) processFile(e.target.files);
+    });
+    document.getElementById('desktopFileInput').addEventListener('change', function(e) {
+        if (e.target.files.length > 0) processFile(e.target.files);
+    });
 
-        // Handle Desktop Drag and Drop Interactions
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropZone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                dropZone.classList.add('dragover');
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('dragover');
-            }, false);
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            if (files.length > 0) {
-                processFile(files[0]);
-            }
-        });
-
-        // Handle Submit
-        document.getElementById('receiptForm').addEventListener('submit', async (e) => {
+    // Handle Drag Zone States on Desktop
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const msg = document.getElementById('msg');
+            dropZone.classList.add('dragover');
+        }, false);
+    });
 
-            // Form enforcement validation check
-            if (!fileDataObj || !fileDataObj.base64Str) {
-                msg.style.display = 'block';
-                msg.style.backgroundColor = '#fee2e2';
-                msg.style.color = '#dc2626';
-                msg.textContent = "⚠️ Please take a photo or choose a receipt file first.";
-                return;
-            }
-            btn.disabled = true; msg.style.display = 'block';
-            msg.style.backgroundColor = '#f3f4f6';
-            msg.style.color = '#1f2937';
-            msg.textContent = "⏳ Uploading to Google Drive...";
-            const payload = {
-                name: document.getElementById('name').value,
-                date: document.getElementById('date').value,
-                category: document.getElementById('category').value,
-                amount: document.getElementById('amount').value,
-                description: document.getElementById('description').value,
-                receiptFile: fileDataObj
-            }; try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: {
-                        "Content-Type": "text/plain"
-                    },
-                    body: JSON.stringify(payload)
-                });
-                msg.style.backgroundColor = '#dcfce7';
-                msg.style.color = '#16a34a';
-                msg.textContent = "🎉 Successfully uploaded!";
-                // Clean up and reset states
-                document.getElementById('receiptForm').reset();
-                document.getElementById('date').value = new Date().toISOString().split('T')[0];
-                fileStatus.style.display = 'none'; fileDataObj = null;
-            } catch (err) {
-                msg.style.backgroundColor = '#fee2e2';
-                msg.style.color = '#dc2626';
-                msg.textContent = "❌ Upload failed. Please try again.";
-                console.error(err);
-            } finally {
-                btn.disabled = false;
-            }
-        });
-    </script>
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+        }, false);
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files.length > 0) {
+            processFile(files);
+        }
+    });
+
+    // Handle Form Processing Submission 
+    document.getElementById('receiptForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const msg = document.getElementById('msg');
+        
+        // Strict runtime requirement checks
+        if (!fileDataObj || !fileDataObj.base64Str) {
+            msg.style.display = 'block';
+            msg.style.backgroundColor = '#fee2e2';
+            msg.style.color = '#dc2626';
+            msg.textContent = "⚠️ Please take a photo or select a receipt file first.";
+            return;
+        }
+        
+        btn.disabled = true;
+        msg.style.display = 'block';
+        msg.style.backgroundColor = '#f3f4f6';
+        msg.style.color = '#1f2937';
+        msg.textContent = "⏳ Uploading to Google Drive...";
+
+        const payload = {
+            name: document.getElementById('name').value,
+            date: document.getElementById('date').value,
+            category: document.getElementById('category').value,
+            amount: document.getElementById('amount').value,
+            description: document.getElementById('description').value,
+            receiptFile: fileDataObj
+        };
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify(payload)
+            });
+
+            msg.style.backgroundColor = '#dcfce7';
+            msg.style.color = '#16a34a';
+            msg.textContent = "🎉 Successfully uploaded!";
+            
+            // Reinitialize form elements and tracking states
+            document.getElementById('receiptForm').reset();
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
+            
+            mobileFileStatus.style.display = 'none';
+            desktopInstructionText.style.color = '#374151';
+            desktopInstructionText.textContent = DEFAULT_DESKTOP_TEXT;
+            
+            fileDataObj = null;
+        } catch (err) {
+            msg.style.backgroundColor = '#fee2e2';
+            msg.style.color = '#dc2626';
+            msg.textContent = "❌ Upload failed. Please try again.";
+            console.error(err);
+        } finally {
+            btn.disabled = false;
+        }
+    });
+</script>
 
 </body>
-
 </html>
