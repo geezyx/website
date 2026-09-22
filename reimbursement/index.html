@@ -50,13 +50,13 @@
 
         /* Default text for desktop users */
         #fileLabel::before {
-            content: "📁 Drag & drop receipt or click to browse";
+            content: "📁 Drag & drop receipt/PDF or click to browse";
         }
 
         /* Responsive adaptation: switch message if the device relies on touch interactions */
         @media (pointer: coarse) {
             #fileLabel::before {
-                content: "📸 Tap to take photo or browse";
+                content: "📸 Tap to take photo, upload receipt or PDF";
             }
         }
         
@@ -116,9 +116,9 @@
         </div>
 
         <div class="camera-box" id="dropZone">
-            <!-- Text content managed dynamically via CSS pseudo-elements / JS overrides -->
             <span id="fileLabel"></span>
-            <input type="file" id="receiptFile" accept="image/*" capture="environment" required>
+            <!-- 🔄 Updated to allow PDFs and removed strict mobile camera capture -->
+            <input type="file" id="receiptFile" accept="image/*,application/pdf" required>
         </div>
 
         <div id="msg"></div>
